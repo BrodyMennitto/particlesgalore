@@ -4,8 +4,8 @@ let shape;
 let particles = [];
 
 function preload() {
-img = loadImage('fur.png');
-slime = loadImage('slime.png');
+img = loadImage('images/fur.png');
+slime = loadImage('images/slime.png');
 } 
 
 function setup() {
