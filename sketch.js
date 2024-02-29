@@ -1,6 +1,7 @@
 let img;
 let slime;
 let shape;
+let total = 5;
 let particles = [];
 
 function preload() {
@@ -10,23 +11,24 @@ slime = loadImage('images/slime.png');
 
 function setup() {
   createCanvas(500, 500);
-  shape = createGraphics(500, 500);
+  shape = createGraphics(540, 540);
 }
 
  function draw() {
   clear();
-  background(0);
+  blendMode(ADD);
+  background(150, 72, 65);
   
-  fill (200, 0, 255);
+  fill (150, 175, 255);
   noStroke();
-  triangle (250, 20, 175, 175, 325, 175);
+  triangle (250, 100, 205, 185, 295, 185);
 
   shape.fill ('rgba(0, 0, 0, 255)');
   shape.beginShape();
-  shape.vertex(175, 155);
-  shape.vertex(325, 155);
-  shape.vertex(475, 435);
-  shape.vertex(25, 435);
+  shape.vertex(195, 175);
+  shape.vertex(345, 175);
+  shape.vertex(495, 455);
+  shape.vertex(45, 455);
   shape.endShape(CLOSE);
 
   img.mask(shape);
@@ -40,13 +42,13 @@ function setup() {
   
   let p = new Particle();
   particles.push(p);
-  for (let i = particles.length-1; i >= 2; i--){
+  for (let i = particles.length-1; i >= 0; i--){
   particles[i].update();
   particles[i].show();
 
-   if (particles[i].finished()) {
-    particles.splice(i, 1);
-  }
+   //if (particles[i].finished()) {
+    //particles.splice(i, 1);
+  //}
  }
 }
 
@@ -66,15 +68,15 @@ class Particle {
   update() {
     this.x += this.vx;
     this.y += this.vy;
-    this.alpha -= 1;
+    this.alpha -=1;
   }
 
 show() {
   noStroke();
-  tint(255, this.alpha);
-  image(slime, this.x, this.y, 125, 125);
+  fill(75, 0, 0, this.alpha);
+  //image(slime, this.x, this.y, 125, 125);
   //rectMode(CENTER);
-  //rect(this.x, this.y, 15);
+  ellipse(this.x, this.y, 8);
   
 }
 }
