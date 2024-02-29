@@ -38,9 +38,9 @@ function setup() {
   stroke(0);
   noFill();
   
-   let p = new Particle();
+  let p = new Particle();
   particles.push(p);
-  for (let i = particles.length-1; i >= 0; i--){
+  for (let i = particles.length-1; i >= 2; i--){
   particles[i].update();
   particles[i].show();
 
@@ -54,8 +54,8 @@ class Particle {
   constructor(){
     this.x = 250;
     this.y = 80;
-    this.vx = random(-8, 8);
-    this.vy = random(-8, 8);
+    this.vx = random(-1, 1);
+    this.vy = random(1, -1);
     this.alpha = 255;
   }
 
