@@ -17,9 +17,9 @@ function setup() {
  function draw() {
   clear();
   blendMode(ADD);
-  background(150, 72, 65);
+  background(100, 0, 200);
   
-  fill (150, 175, 255);
+  fill (75, 75, 0);
   noStroke();
   triangle (250, 100, 205, 185, 295, 185);
 
@@ -33,12 +33,13 @@ function setup() {
 
   img.mask(shape);
   imageMode(CENTER);
+  blendMode(ADD);
   image(img, width/2, height/2, 300, 300);
 
-  fill(255, 60, 100);
-  text("(" + mouseX + ", " + mouseY + ")", mouseX, mouseY);
-  stroke(0);
-  noFill();
+  //fill(255, 60, 100);
+  //text("(" + mouseX + ", " + mouseY + ")", mouseX, mouseY);
+  //stroke(0);
+  //noFill();
   
   let p = new Particle();
   particles.push(p);
@@ -55,9 +56,9 @@ function setup() {
 class Particle {
   constructor(){
     this.x = 250;
-    this.y = 80;
-    this.vx = random(-1, 1);
-    this.vy = random(1, -1);
+    this.y = 98;
+    this.vx = random(-8, 8);
+    this.vy = random(8, -8);
     this.alpha = 255;
   }
 
@@ -68,15 +69,16 @@ class Particle {
   update() {
     this.x += this.vx;
     this.y += this.vy;
-    this.alpha -=1;
+    this.alpha -=5;
   }
 
 show() {
   noStroke();
-  fill(75, 0, 0, this.alpha);
+  fill(200, 0, 200, this.alpha);
+  blendMode(HARD_LIGHT);
   //image(slime, this.x, this.y, 125, 125);
   //rectMode(CENTER);
-  ellipse(this.x, this.y, 8);
+  ellipse(this.x, this.y, 17);
   
 }
 }
