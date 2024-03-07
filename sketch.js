@@ -14,6 +14,8 @@ function setup() {
   for (let i = 0; i < numberOfParticles; i++)
   {particles.push(new Particle());
     }
+
+  
   shape = createGraphics(540, 540);
 }
 
@@ -22,7 +24,7 @@ function setup() {
   //blendMode(ADD);
 
   background(100, 0, 200);
-  frameRate(20);
+  frameRate(30);
   
   
   
@@ -54,7 +56,7 @@ function setup() {
     //particles.splice(i, 1);
   //}
  }
-fill (255, 0, 200);
+fill (255, 0, 100);
 noStroke();
 triangle(200, 100, 155, 185, 245, 185);
 //redraw();
@@ -64,10 +66,14 @@ class Particle {
   constructor(){
     this.x = 200;
     this.y = 55;
-    this.xspeed = random(-2, 2);
-    this.yspeed = random(2, -2);
+    this.xspeed = random(-3, 3);
+    this.yspeed = random(3, -3);
+    this.angle = createVector(random(360), random(360));
     this.alpha = 255;
+    
   }
+
+  
 
   //finished(){
     //return this.alpha < 0;
@@ -76,7 +82,8 @@ class Particle {
  move() {
     this.x += this.xspeed;
     this.y += this.yspeed;
-    this.alpha -= 3;
+    this.angle.add(this.xspeed);
+    this.alpha -= 5;
   }
 
 show() {
