@@ -1,7 +1,7 @@
 let img;
 let slime;
 let shape;
-let total = 5;
+let numberOfParticles = 1;
 let particles = [];
 
 function preload() {
@@ -10,76 +10,83 @@ slime = loadImage('images/slime.png');
 } 
 
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(400, 400);
+  for (let i = 0; i < numberOfParticles; i++)
+  {particles.push(new Particle());
+    }
   shape = createGraphics(540, 540);
 }
 
  function draw() {
   clear();
-  blendMode(ADD);
-  background(100, 0, 200);
-  
-  fill (75, 75, 0);
-  noStroke();
-  triangle (250, 100, 205, 185, 295, 185);
+  //blendMode(ADD);
 
+  background(100, 0, 200);
+  frameRate(20);
+  
+  
+  
+
+  noTint();
   shape.fill ('rgba(0, 0, 0, 255)');
   shape.beginShape();
-  shape.vertex(195, 175);
-  shape.vertex(345, 175);
-  shape.vertex(495, 455);
-  shape.vertex(45, 455);
+  shape.vertex(185, 75);
+  shape.vertex(355, 75);
+  shape.vertex(525, 375);
+  shape.vertex(25, 375);
   shape.endShape(CLOSE);
 
   img.mask(shape);
   imageMode(CENTER);
-  blendMode(ADD);
-  image(img, width/2, height/2, 300, 300);
+  image(img, width/2, 300, 300, 300);
 
   //fill(255, 60, 100);
   //text("(" + mouseX + ", " + mouseY + ")", mouseX, mouseY);
-  //stroke(0);
+ // stroke(0);
   //noFill();
-  
   let p = new Particle();
   particles.push(p);
-  for (let i = particles.length-1; i >= 0; i--){
-  particles[i].update();
+  
+  for (let i = 0; i < particles.length; i++){
+  particles[i].move();
   particles[i].show();
-
-   //if (particles[i].finished()) {
+  //if (particles[i].finished()) {
     //particles.splice(i, 1);
   //}
  }
+fill (255, 0, 200);
+noStroke();
+triangle(200, 100, 155, 185, 245, 185);
+//redraw();
 }
 
 class Particle {
   constructor(){
-    this.x = 250;
-    this.y = 98;
-    this.vx = random(-8, 8);
-    this.vy = random(8, -8);
+    this.x = 200;
+    this.y = 55;
+    this.xspeed = random(-2, 2);
+    this.yspeed = random(2, -2);
     this.alpha = 255;
   }
 
-  finished(){
-    return this.alpha < 0;
-  }
+  //finished(){
+    //return this.alpha < 0;
+  //}
 
-  update() {
-    this.x += this.vx;
-    this.y += this.vy;
-    this.alpha -=5;
+ move() {
+    this.x += this.xspeed;
+    this.y += this.yspeed;
+    this.alpha -= 3;
   }
 
 show() {
-  noStroke();
-  fill(200, 0, 200, this.alpha);
-  blendMode(HARD_LIGHT);
-  //image(slime, this.x, this.y, 125, 125);
+  //noStroke();
+  tint(255, this.alpha);
+  //fill(200, 0, 200, this.alpha);
+  //blendMode(HARD_LIGHT);
+  image(slime, this.x, this.y, 62.5, 62.5);
   //rectMode(CENTER);
-  ellipse(this.x, this.y, 17);
-  
+  //ellipse(this.x, this.y, 17);  
 }
 }
 
