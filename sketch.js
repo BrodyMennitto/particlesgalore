@@ -1,12 +1,16 @@
 let img;
 let slime;
+let drakee;
 let shape;
 let numberOfParticles = 1;
 let particles = [];
+let monsters = [slime, drakee];
+
 
 function preload() {
 img = loadImage('images/fur.png');
 slime = loadImage('images/slime.png');
+drakee = loadImage('images/drakee.png');
 } 
 
 function setup() {
@@ -20,14 +24,12 @@ function setup() {
 }
 
  function draw() {
-  clear();
+  //clear();
   //blendMode(ADD);
+  
 
   background(100, 0, 200);
-  frameRate(30);
-  
-  
-  
+  frameRate(15);
 
   noTint();
   shape.fill ('rgba(0, 0, 0, 255)');
@@ -65,13 +67,16 @@ triangle(200, 100, 155, 185, 245, 185);
 class Particle {
   constructor(){
     this.x = 200;
-    this.y = 55;
-    this.xspeed = random(-3, 3);
-    this.yspeed = random(3, -3);
-    this.angle = createVector(random(360), random(360));
+    this.y = 60;
+    this.xspeed = random(-7, 7);
+    this.yspeed = random(-1, 1);
+    this.angle = createVector(45, 45);
     this.alpha = 255;
+    this.rotationSpeed = createVector(random(0, 0.2), random(0, 0.2));
     
   }
+
+
 
   
 
@@ -82,7 +87,7 @@ class Particle {
  move() {
     this.x += this.xspeed;
     this.y += this.yspeed;
-    this.angle.add(this.xspeed);
+    
     this.alpha -= 5;
   }
 
@@ -92,8 +97,16 @@ show() {
   //fill(200, 0, 200, this.alpha);
   //blendMode(HARD_LIGHT);
   image(slime, this.x, this.y, 62.5, 62.5);
-  //rectMode(CENTER);
-  //ellipse(this.x, this.y, 17);  
 }
 }
+
+function mousePressed(){
+ slime = drakee;
+}
+
+
+
+
+
+
 
